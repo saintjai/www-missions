@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Organization Name</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-white text-gray-800 font-sans">
 
@@ -24,6 +25,47 @@
     <p class="text-center text-gray-700">We exist to proclaim the name of Jesus Christ to every nation, equip believers, and support ministries worldwide. Our foundation is built on faith, love, and the Great Commission (Matthew 28:19).</p>
   </section>
 
+<section class="py-12 bg-gray-100">
+  <div class="max-w-4xl mx-auto px-4" x-data="{ current: 0, images: [
+    'https://via.placeholder.com/800x400?text=Mission+Trip+1',
+    'https://via.placeholder.com/800x400?text=Worship+Event',
+    'https://via.placeholder.com/800x400?text=Outreach+In+Africa'
+  ]}">
+    <h2 class="text-2xl font-bold text-center mb-6">Photo Highlights</h2>
+
+    <div class="relative">
+      <img 
+        :src="images[current]" 
+        class="w-full h-64 object-cover rounded-lg shadow-lg transition-all duration-500" 
+        alt="Slideshow image"
+      />
+
+      <!-- Navigation Buttons -->
+      <button 
+        @click="current = (current - 1 + images.length) % images.length" 
+        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-r"
+      >&#8592;</button>
+
+      <button 
+        @click="current = (current + 1) % images.length" 
+        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-l"
+      >&#8594;</button>
+    </div>
+
+    <!-- Dots Navigation -->
+    <div class="flex justify-center space-x-2 mt-4">
+      <template x-for="(img, index) in images" :key="index">
+        <div 
+          class="w-3 h-3 rounded-full"
+          :class="current === index ? 'bg-blue-700' : 'bg-gray-400'"
+          @click="current = index"
+        ></div>
+      </template>
+    </div>
+  </div>
+</section>
+
+  
   <!-- Global Reach -->
   <section class="bg-gray-100 py-12">
     <div class="max-w-4xl mx-auto px-4 text-center">
